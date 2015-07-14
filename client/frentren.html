@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>FRENTREN
+  </title>
+  <style>
+ .items {
+      display: inline-block;
+      width:33%;
+      }
+      html,body{
+        background-image: url("bat/frontback.jpg");
+      }
+ .lines {
+        display: inline-block; width: 33%;
+      }
+ #cartList{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+ }     
+ 
+.className:hover{
+  cursor: pointer;
+}  
+
+  </style>
+
+  
+</head>
+
+<body>
+  <div>
+
+      <h1>
+         <center> 
+                <b>FRENTREN</b> <img src="bat\logo.png" alt="FRENTREN"  style="height: 100px;width:100px;">
+<img src="bat\bag.png"  class="className" style="height: 100px;width:100px;" onclick="showbag()">
+     <div id="cartList">
+     </div>
+<span id="cartitems">0
+</span>
+         </center>
+
+     </h1> 
+
+<div class="lines">
+  <div>
+    <h3>Grab things upto 50%discount</h3>
+  </div>
+</div>
+<div class="lines">
+  <div> 
+      <h4> click on "add to cart" to shop!!!!</h4>
+
+ </div>
+         
+</div>
+<div class="lines">
+  <div>
+    <h4>
+    <a href="shipment.html">go to shipment page</a>
+    </h4> 
+  </div>
+</div>         
+
+         
+
+<div class="items"> 
+
+     <div>
+         <h5>SS cricket bat English willow</h5>
+
+         <img src="bat\ss bat.jpg" alt="english willow" style="height: 250px;width:250px;">
+
+         <button class="className" type="button" onclick="myFunction('bat')" >Add to cart</button>
+    </div>
+
+         <p>price=5000rs/- with <strong>50%discount</strong> price = 2500rs/-</p>
+</div>
+     
+<div class="items"> 
+    <div>
+       <h5>ADIDAS sports shoe</h5>
+  
+         <img src="bat\adidas shoe.jpg" alt="adidas shoe"style="height: 250px;width:250px; background-color: Aqua;">
+
+          <button class="className" type="button" onclick="myFunction('adidas')">Add to cart</button>
+ 
+    </div>
+
+         <p> price = 1899rs/- <strong>new arrival</strong></p> 
+</div>
+<div class="items">
+     <div>
+
+         <h5>APPLE iphone6 plus</h5>  
+
+         <img src="bat\iphone6 plus.jpg" alt ="apple iphone6 plus" style="height: 250px;width:250px;">
+
+          <button class="className" type="button" onclick="myFunction('iphone')" >Add to cart</button>
+  
+    </div>  
+
+        <p> price = 41,999rs/- only at<strong> 50%discount</strong></p>
+ 
+</div>
+<div> 
+      <button onclick= "makerequest('you clicked me')">submit</button>
+
+</div>
+<script type="text/javascript">
+var cartItems=[];
+function myFunction(name){
+  cartItems.push(name);
+  listCount();
+  showbag();
+}
+function makerequest(name){
+  var xmlhttp=new XMLHttpRequest();
+  xmlhttp.open("POST","makeshipment",true);
+  xmlhttp.setRequestHeader("Content-type","applicaton/x-www-form-urlencoded");
+  xmlhttp.send("fname=cow&lname=dog");
+}
+function listCount(){
+  document.getElementById('cartitems').innerHTML= cartItems.length;
+}
+function showbag(){
+  
+  var htmlStr='<ol>';
+  for (var i = 0; i < cartItems.length; i++) {
+    htmlStr+='<li>'+cartItems[i]+'<span class="className" onclick="removeItem('+i+');">&#x2715;</span></li>';
+  };
+  htmlStr+='</ol>';
+  document.getElementById('cartList').innerHTML = htmlStr;
+}
+function removeItem(index){
+  cartItems.splice(index,1);
+  listCount();
+  showbag();
+}
+</script>
+   
+</body>
+
+</html>
