@@ -118,10 +118,10 @@ function myFunction(name){
   showbag();
 }
 function makerequest(name){
-  var xmlhttp=new XMLHttpRequest();
-  xmlhttp.open("POST","makeshipment",true);
-  xmlhttp.setRequestHeader("Content-type","applicaton/x-www-form-urlencoded");
-  xmlhttp.send("fname=cow&lname=dog");
+var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+xmlhttp.open("POST", "/makeshipment");
+xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+xmlhttp.send(JSON.stringify([{name:"item1", price:10},{name:"item2", price:20},{name:"item3", price:30}]));
 }
 function listCount(){
   document.getElementById('cartitems').innerHTML= cartItems.length;
