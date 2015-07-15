@@ -1,11 +1,11 @@
 var express = require('express');
 var fs = require('fs');
 var app = express();
-var mongoose = require('mongoose');
+
 var bodyParse = require("body-parser");
 //var configDB = require('product.js');
 var frentren ;
-mongoose.connect('mongodb://localhost/fretrenadmin');
+
 
 app.use(express.static('client'));
 app.use(bodyParse.json());
@@ -24,7 +24,11 @@ fs.readFile('./client/frentren.html', function (manoj, htmlcontent) {
 	  response.send(htmlcontent);
 	});
 	app.post('/makeshipment',function(req,response){
-		console.log(req.body);
+		console.log(req.body.order);
+		for(i=0;i<req.body.order.length;i++){
+			Product.create(req.body.order[i]);
+		}
+
 	});
 
 	var server = app.listen(3000, function () {
@@ -34,6 +38,12 @@ fs.readFile('./client/frentren.html', function (manoj, htmlcontent) {
 	  console.log('Example app listening at http://%s:%s', host, port);
 	});
 });
+
+
+
+var Product=require('./product');
+//Product.find({}).remove();
+//Product.create({'name':'adidas','price':1899},{'name':'bat','price':2500},{'name':'iphone','price':41999});
 
 /*
 

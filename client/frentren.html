@@ -74,7 +74,7 @@
 
          <img src="bat\ss bat.jpg" alt="english willow" style="height: 250px;width:250px;">
 
-         <button class="className" type="button" onclick="myFunction('bat')" >Add to cart</button>
+         <button class="className" type="button" onclick="myFunction('bat',2500)" >Add to cart</button>
     </div>
 
          <p>price=5000rs/- with <strong>50%discount</strong> price = 2500rs/-</p>
@@ -86,7 +86,7 @@
   
          <img src="bat\adidas shoe.jpg" alt="adidas shoe"style="height: 250px;width:250px; background-color: Aqua;">
 
-          <button class="className" type="button" onclick="myFunction('adidas')">Add to cart</button>
+          <button class="className" type="button" onclick="myFunction('adidas',1899)">Add to cart</button>
  
     </div>
 
@@ -99,7 +99,7 @@
 
          <img src="bat\iphone6 plus.jpg" alt ="apple iphone6 plus" style="height: 250px;width:250px;">
 
-          <button class="className" type="button" onclick="myFunction('iphone')" >Add to cart</button>
+          <button class="className" type="button" onclick="myFunction('iphone',41999)" >Add to cart</button>
   
     </div>  
 
@@ -112,16 +112,16 @@
 </div>
 <script type="text/javascript">
 var cartItems=[];
-function myFunction(name){
-  cartItems.push(name);
+function myFunction(name,price){
+  cartItems.push({'name':name,'price':price});
   listCount();
   showbag();
 }
 function makerequest(name){
-var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-xmlhttp.open("POST", "/makeshipment");
-xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xmlhttp.send(JSON.stringify([{name:"item1", price:10},{name:"item2", price:20},{name:"item3", price:30}]));
+  var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+  xmlhttp.open("POST", "/makeshipment");
+  xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  xmlhttp.send(JSON.stringify({'order':cartItems}));
 }
 function listCount(){
   document.getElementById('cartitems').innerHTML= cartItems.length;
@@ -130,7 +130,7 @@ function showbag(){
   
   var htmlStr='<ol>';
   for (var i = 0; i < cartItems.length; i++) {
-    htmlStr+='<li>'+cartItems[i]+'<span class="className" onclick="removeItem('+i+');">&#x2715;</span></li>';
+    htmlStr+='<li>'+cartItems[i].name+'<span class="className" onclick="removeItem('+i+');">&#x2715;</span></li>';
   };
   htmlStr+='</ol>';
   document.getElementById('cartList').innerHTML = htmlStr;
